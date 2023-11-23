@@ -11,7 +11,7 @@ const FileExplore = () => {
       </div>
       <div className="col-span-3 grid md:grid-cols-3 gap-3 ">
         {
-          arr.map(a=><FileCard/>)
+          arr.map(a=><FileCard key={a}/>)
         }
       </div>
     </div>

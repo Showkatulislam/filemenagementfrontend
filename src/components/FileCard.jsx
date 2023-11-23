@@ -44,7 +44,7 @@ const FileCard = ({ fileName = "file Name", type = "file" }) => {
           </form>
           <h3 className="font-bold text-lg">{fileName}</h3>
             <div className="py-5">
-                <img src={defaultImage} alt="" srcset="" />
+                <img src={defaultImage} alt="" srcSet="" />
             </div>
         </div>
       </dialog>
