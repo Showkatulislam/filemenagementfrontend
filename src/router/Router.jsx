@@ -4,6 +4,7 @@ import App from "../App";
 import Login from "../page/Login";
 import FileExplore from "../page/FileExplore";
 import PrivateRoute from "../providers/PrivateRoute";
+import Deshboard from "../page/Deshboard";
 const router = createBrowserRouter([
     {
       path: "",
@@ -21,6 +22,9 @@ const router = createBrowserRouter([
           element:<PrivateRoute><FileExplore/></PrivateRoute>
         }
       ]
+    },{
+      path:"/deshboard",
+      element:<Deshboard/>
     }
 ])
 

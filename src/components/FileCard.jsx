@@ -8,8 +8,14 @@ import {
 } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { GrView } from "react-icons/gr";
-import defaultImage from "../assets/defaultImage.avif";
-const FileCard = ({ fileName = "file Name", type = "file" ,file}) => {
+
+import Modal from "./Modal";
+const FileCard = ({ fileName = "file Name", type = "file" ,file, DeleteFile}) => {
+ 
+  const {fileUrl}=file
+ 
+  type=fileUrl.split("").slice(fileUrl.length-3).join("");
+
   return (
     <div className="card w-60 bg-white">
       <div className="card-body flex  items-center">
@@ -23,7 +29,7 @@ const FileCard = ({ fileName = "file Name", type = "file" ,file}) => {
         </div>
         <h2 className="card-title text-md">{file.fileName}</h2>
         <div className="card-actions  justify-end">
-          <button className="text-2xl">
+          <button className="text-2xl" onClick={()=> DeleteFile(file.id)}>
             <MdDelete />
           </button>
           <button
@@ -34,19 +40,7 @@ const FileCard = ({ fileName = "file Name", type = "file" ,file}) => {
           </button>
         </div>
       </div>
-      <dialog id="my_modal_3" className="modal ">
-        <div className="modal-box bg-slate-200">
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-          </form>
-          <h3 className="font-bold text-lg">{fileName}</h3>
-          <div className="py-5">
-            <img src={file?.fileUrl || defaultImage } alt="" srcSet="" />
-          </div>
-        </div>
-      </dialog>
+      <Modal name={fileName} />
     </div>
   );
 };

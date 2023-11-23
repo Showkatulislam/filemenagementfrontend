@@ -6,7 +6,9 @@ import UseAuth from "../Hook/UseAuth";
 const AddFile = ({addFile}) => {
   const { register, handleSubmit } = useForm();
   const {user}=UseAuth()
-
+const fileRead=(file)=>{
+  
+}
   const handleForm=e=>{
     const formData = new FormData();
     formData.append('FileName', e.file_name);

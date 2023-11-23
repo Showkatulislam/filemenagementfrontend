@@ -4,6 +4,7 @@ import UseAuth from "../Hook/UseAuth";
 
 const Navbar = () => {
   const { user,logOut } = UseAuth();
+  const admin=true;
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start lg:px-7">
@@ -38,7 +39,7 @@ const Navbar = () => {
           <Items />
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end gap-5">
         {user ? (
           <button onClick={logOut}>logout</button>
         ) : (
@@ -46,6 +47,9 @@ const Navbar = () => {
             Login
           </Link>
         )}
+        {
+          admin && <Link to="/deshboard">Deshboard</Link>
+        }
       </div>
     </div>
   );
