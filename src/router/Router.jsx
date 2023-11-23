@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import App from "../App";
 import Login from "../page/Login";
 import FileExplore from "../page/FileExplore";
+import PrivateRoute from "../providers/PrivateRoute";
 const router = createBrowserRouter([
     {
       path: "",
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
           element:<Login/>
         },{
           path:'/file',
-          element:<FileExplore/>
+          element:<PrivateRoute><FileExplore/></PrivateRoute>
         }
       ]
     }

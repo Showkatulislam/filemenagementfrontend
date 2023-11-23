@@ -9,15 +9,11 @@ import {
 import { MdDelete } from "react-icons/md";
 import { GrView } from "react-icons/gr";
 import defaultImage from "../assets/defaultImage.avif";
-const FileCard = ({ fileName = "file Name", type = "file" }) => {
+const FileCard = ({ fileName = "file Name", type = "file" ,file}) => {
   return (
     <div className="card w-60 bg-white">
       <div className="card-body flex  items-center">
-        <div
-          role="button"
-          onClick={() => document.getElementById("my_modal_3").showModal()}
-          className="text-5xl  text-purple-500"
-        >
+        <div className="text-5xl  text-purple-500">
           {type === "file" && <FaFile />}
           {type === "png" && <FaFileImage />}
           {type === "jpg" && <FaFileImage />}
@@ -25,12 +21,15 @@ const FileCard = ({ fileName = "file Name", type = "file" }) => {
           {type === "video" && <FaFileVideo />}
           {type === "word" && <FaRegFileWord />}
         </div>
-        <h2 className="card-title text-md">{fileName}</h2>
+        <h2 className="card-title text-md">{file.fileName}</h2>
         <div className="card-actions  justify-end">
           <button className="text-2xl">
             <MdDelete />
           </button>
-          <button className="text-2xl">
+          <button
+            onClick={() => document.getElementById("my_modal_3").showModal()}
+            className="text-2xl"
+          >
             <GrView />
           </button>
         </div>
@@ -43,9 +42,9 @@ const FileCard = ({ fileName = "file Name", type = "file" }) => {
             </button>
           </form>
           <h3 className="font-bold text-lg">{fileName}</h3>
-            <div className="py-5">
-                <img src={defaultImage} alt="" srcSet="" />
-            </div>
+          <div className="py-5">
+            <img src={file?.fileUrl || defaultImage } alt="" srcSet="" />
+          </div>
         </div>
       </dialog>
     </div>

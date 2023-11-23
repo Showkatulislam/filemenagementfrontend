@@ -1,14 +1,26 @@
 import { useCallback, useState } from "react";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
+import UseAuth from "../Hook/UseAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 
 const Login = () => {
   const [variant, setVariant] = useState("LOGIN");
+  const { userLogin, userRegister, message,setMessage} = UseAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+  console.log('state in the location login page', location.state)
+
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      username: "",
+      userName: "",
       email: "",
       password: "",
+      phoneNumber: "",
     },
   });
   const toggle = useCallback(() => {
@@ -21,12 +33,31 @@ const Login = () => {
 
   const handleForm = (data) => {
     console.log(data);
+    const user = {
+      email: data.email,
+      password: data.password,
+    };
+    if (variant === "LOGIN") {
+      userLogin(user);
+      if(user){
+        toast.success('Login Successfully')
+        navigate(from)
+        setMessage("")
+      }
+    } else {
+      userRegister(data);
+      if(message){
+        
+        setVariant("REGISTER")
+      }
+    }
   };
 
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="card shrink-0 w-full max-w-md shadow-2xl bg-base-100">
         <form className="card-body" onSubmit={handleSubmit(handleForm)}>
+        {message && <p className="text-center">{message}</p>}
           <h1
             className="
             text-4xl
@@ -34,13 +65,13 @@ const Login = () => {
             font-bold
             "
           >
-        {variant === "LOGIN" ? "Login Please" : "Register"}
+            {variant === "LOGIN" ? "Login Please" : "Register"}
           </h1>
           {variant === "REGISTER" && (
             <Input
-              label={"UserName"}
+              label={"User Name"}
               type={"text"}
-              id="username"
+              id="userName"
               register={register}
             />
           )}
@@ -57,6 +88,15 @@ const Login = () => {
             id="password"
             register={register}
           />
+          {variant === "REGISTER" && (
+            <Input
+              label={"Phone Number"}
+              type={"text"}
+              id="phoneNumber"
+              register={register}
+            />
+          )}
+
           <div className="form-control mt-6">
             <button type="submit" className="btn btn-primary">
               {variant === "REGISTER" ? "Register" : "Login"}

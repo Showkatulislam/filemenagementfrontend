@@ -3,7 +3,7 @@ import Items from "./Items";
 import UseAuth from "../Hook/UseAuth";
 
 const Navbar = () => {
-  const { user } = UseAuth();
+  const { user,logOut } = UseAuth();
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start lg:px-7">
@@ -40,7 +40,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <button>logout</button>
+          <button onClick={logOut}>logout</button>
         ) : (
           <Link to="/login" className="btn">
             Login
