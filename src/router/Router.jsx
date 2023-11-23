@@ -4,7 +4,10 @@ import App from "../App";
 import Login from "../page/Login";
 import FileExplore from "../page/FileExplore";
 import PrivateRoute from "../providers/PrivateRoute";
-import Deshboard from "../page/Deshboard";
+import Deshboard from "../Layout/Deshboard";
+import DeshboardHome from "../page/DeshboardHome";
+import AdminProvider from "../providers/AdminProvider";
+import AllFile from "../components/AllFile";
 const router = createBrowserRouter([
     {
       path: "",
@@ -24,7 +27,16 @@ const router = createBrowserRouter([
       ]
     },{
       path:"/deshboard",
-      element:<Deshboard/>
+      element:<AdminProvider><Deshboard/></AdminProvider>,
+      children:[
+        {
+          path:'',
+          element:<DeshboardHome/>
+        },{
+          path:'all/:id',
+          element:<AllFile/>
+        }
+      ]
     }
 ])
 

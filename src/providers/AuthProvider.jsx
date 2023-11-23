@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import useAxios from "../Hook/useAxios";
+import { Navigate } from "react-router-dom";
 export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
   const [user,setUser]=useState();
@@ -27,8 +28,11 @@ const AuthProvider = ({ children }) => {
   },[])
 
   const logOut=()=>{
+    setLoading(true)
     localStorage.removeItem("user")
     setUser(null)
+    setLoading(false)
+    Navigate('/')
   }
 
 

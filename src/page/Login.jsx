@@ -40,9 +40,9 @@ const Login = () => {
     if (variant === "LOGIN") {
       userLogin(user);
       if(user){
-        toast.success('Login Successfully')
-        navigate(from)
+        navigate('/')
         setMessage("")
+        toast.success('Login Successfully')
       }
     } else {
       userRegister(data);

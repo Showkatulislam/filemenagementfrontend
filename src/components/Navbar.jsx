@@ -4,7 +4,6 @@ import UseAuth from "../Hook/UseAuth";
 
 const Navbar = () => {
   const { user,logOut } = UseAuth();
-  const admin=true;
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start lg:px-7">
@@ -48,7 +47,7 @@ const Navbar = () => {
           </Link>
         )}
         {
-          admin && <Link to="/deshboard">Deshboard</Link>
+          user?.admin==true && <Link to="/deshboard">Deshboard</Link>
         }
       </div>
     </div>
